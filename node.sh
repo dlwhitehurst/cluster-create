@@ -34,6 +34,22 @@ echo \
 sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 
+
+# fix docker as daemon
+sudo cat > /etc/docker/daemon.json <<EOF
+{
+  "exec-opts": ["native.cgroupdriver=systemd"],
+  "log-driver": "json-file",
+  "log-opts": {
+     "max-size": "100m"
+  },
+  "storage-driver": "overlay2"
+}
+EOF
+sudo mkdir -p /etc/systemd/system/docker.service.d
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+
 # Prep for kubernetes install
 sudo apt-get update
 sudo apt-get install -y apt-transport-https ca-certificates curl
@@ -50,4 +66,4 @@ sudo apt-get install -y kubeadm kubelet kubectl
 sudo apt-mark hold kubeadm kubelet kubectl
 
 # done???
-# well, in version 1.22+ the cgroup driver is defaulted to systemd
+sudo shutdown -r now
