@@ -1,10 +1,7 @@
 #!/bin/bash
 
 # This script is to be run on all nodes
-ubuntu/allow-bridge-nf-traffic.sh
-ubuntu/install-docker-2.sh
-ubuntu/update-dns.sh
-
+sudo apt-mark unhold kubeadm kubelet kubectl
 
 # Prep for kubernetes install
 sudo apt-get update
@@ -22,4 +19,4 @@ sudo apt-get install -y kubeadm kubelet kubectl
 sudo apt-mark hold kubeadm kubelet kubectl
 
 # done???
-sudo shutdown -r now
+#sudo shutdown -r now
