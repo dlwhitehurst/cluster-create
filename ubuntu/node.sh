@@ -31,6 +31,9 @@ sudo cat <<EOF | sudo tee /etc/docker/daemon.json
 }
 EOF
 
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+
 # unhold if needed
 sudo apt-mark unhold kubeadm kubelet kubectl
 
@@ -49,8 +52,7 @@ sudo apt-get update
 sudo apt-get install -y kubeadm=1.22.0-00 kubelet=1.22.0-00 kubectl=1.22.0-00
 sudo apt-mark hold kubeadm kubelet kubectl
 
-sudo systemctl daemon-reload
-sudo systemctl restart docker
-sudo systemctl restart kubelet
+#sudo systemctl daemon-reload
+#sudo systemctl restart kubelet
 
 
