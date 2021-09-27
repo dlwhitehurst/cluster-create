@@ -60,6 +60,7 @@ Vagrant.configure("2") do |config|
             vb.name = "kubemaster"
             vb.memory = 2048
             vb.cpus = 2
+            vb.gui = false
         end
         node.vm.hostname = "kubemaster"
         node.vm.network :private_network, ip: IP_NW + "#{MASTER_IP_START + i}"
