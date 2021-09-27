@@ -20,5 +20,19 @@ EOF
 sudo sysctl --system
 
 # Docker
+sudo apt-get update
 sudo apt install -y docker.io
+
+# cgroups driver
+
+sudo cat <<EOF | sudo tee /etc/docker/daemon.json
+{
+"exec-opts": ["native.cgroupdriver=systemd"]
+}
+EOF
+
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+sudo systemctl restart kubelet
+
 
