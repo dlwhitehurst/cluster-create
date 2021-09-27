@@ -33,3 +33,4 @@ sudo apt-get install -y kubeadm kubelet kubectl
 sudo apt-mark hold kubeadm kubelet kubectl
 
 # done???
+# well, in version 1.22+ the cgroup driver is defaulted to systemd
