@@ -72,7 +72,7 @@ Vagrant.configure("2") do |config|
           s.args = ["enp0s8"]
         end
 
-        node.vm.provision "setup-dns", type: "shell", :path => "ubuntu/update-dns.sh"
+        #node.vm.provision "setup-dns", type: "shell", :path => "ubuntu/update-dns.sh"
 
       end
   end
@@ -94,7 +94,7 @@ Vagrant.configure("2") do |config|
           s.args = ["enp0s8"]
         end
 
-        node.vm.provision "setup-dns", type: "shell", :path => "ubuntu/update-dns.sh"
+        #node.vm.provision "setup-dns", type: "shell", :path => "ubuntu/update-dns.sh"
     end
   end
 end
