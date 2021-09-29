@@ -77,3 +77,12 @@ Now, use `kubectl` to get the nodes.
 kubectl get nodes
 ```
 The cluster should now be ready.
+
+An example ...
+```bash
+vagrant@kubemaster:~$ kubectl get nodes
+NAME         STATUS   ROLES                  AGE   VERSION
+kubemaster   Ready    control-plane,master   39m   v1.22.0
+kubenode01   Ready    <none>                 38m   v1.22.0
+kubenode02   Ready    <none>                 38m   v1.22.0
+```
