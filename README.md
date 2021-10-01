@@ -1,20 +1,27 @@
 # cluster-create
 
-This repo facilitates the creation of a Kubernetes cluster. It does this using
-Vagrant and VirtualBox on a sufficient Ubuntu Linux server. Vagrant is the 
-command line utility for managing the virtual machines or Kubernetes nodes.
-VirtualBox is the virtual machine hypervisor by Oracle. 
+This repo facilitates the creation of a Kubernetes cluster. 
+It does this using Vagrant and VirtualBox. Vagrant is the 
+command line utility for managing the virtual machines or 
+Kubernetes nodes. VirtualBox is the virtual machine hypervisor 
+by Oracle. 
 
-The initial creation and basic provisioning is configured in a file called
-`Vagrantfile`. This tells Vagrant what to create and also makes a call out
-to a shell script to add Docker and the Kubernetes binaries.
+The initial creation and basic provisioning is configured in 
+a file called `Vagrantfile`. This tells Vagrant what to create 
+and also makes a call out to a shell script to add Docker and 
+the Kubernetes binaries.
 
 ## Prerequisites
 
-Before any of this will work, the Linux server needs sufficient RAM, probably
-at least 16GB. The server also needs an installation of VirtualBox and Vagrant.
-This has been tested on Ubuntu 20.04 and a server with 193GB of RAM. Future 
-testing will be done on a Macbook Pro 16GB of RAM. 
+Before any of this will work, the Linux server needs sufficient 
+RAM, probably at least 16GB. The server also needs an installation 
+of VirtualBox and Vagrant. This has been tested on Ubuntu 20.04 
+and a server with 193GB of RAM. Future testing will be done on a 
+Macbook Pro 16GB of RAM.
+
+(UPDATE) The cluster is now running on a macbook pro without 
+noticeable CPU or memory pressure. Do note that the Virtualbox
+and Vagrant installations are for Ubuntu and not OS-X.
 
 To install VirtualBox on Ubuntu 20.04 use the following command:
 ```bash
