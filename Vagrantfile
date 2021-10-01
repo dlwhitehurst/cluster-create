@@ -6,9 +6,12 @@
 NUM_MASTER_NODE = 1
 NUM_WORKER_NODE = 2
 
-IP_NW = "192.168.56."
-MASTER_IP_START = 1
-NODE_IP_START = 2
+# was 192.168.56.
+IP_NW = "192.168.1."
+# was 1,2
+
+MASTER_IP_START = 120
+NODE_IP_START = 130
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
@@ -34,7 +37,7 @@ Vagrant.configure("2") do |config|
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
   # your network.
-  # config.vm.network "public_network"
+  config.vm.network "public_network"
 
   # Share an additional folder to the guest VM. The first argument is
   # the path on the host to the actual folder. The second argument is
@@ -56,16 +59,17 @@ Vagrant.configure("2") do |config|
 
   # Provision Master Nodes
   (1..NUM_MASTER_NODE).each do |i|
-      config.vm.define "kubemaster" do |node|
+      config.vm.define "tmaster" do |node|
         # Name shown in the GUI
         node.vm.provider "virtualbox" do |vb|
-            vb.name = "kubemaster"
+            vb.name = "tmaster"
             vb.memory = 2048
             vb.cpus = 2
             vb.gui = false
         end
-        node.vm.hostname = "kubemaster"
-        node.vm.network :private_network, ip: IP_NW + "#{MASTER_IP_START + i}"
+        node.vm.hostname = "tmaster"
+        # node.vm.network :private_network, ip: IP_NW + "#{MASTER_IP_START + i}"
+        node.vm.network :public_network, ip: IP_NW + "#{MASTER_IP_START + i}"
         node.vm.network "forwarded_port", guest: 22, host: "#{2710 + i}"
 
         node.vm.provision "setup-hosts", :type => "shell", :path => "ubuntu/vagrant/setup-hosts.sh" do |s|
@@ -80,15 +84,16 @@ Vagrant.configure("2") do |config|
 
   # Provision Worker Nodes
   (1..NUM_WORKER_NODE).each do |i|
-    config.vm.define "kubenode0#{i}" do |node|
+    config.vm.define "tnode0#{i}" do |node|
         node.vm.provider "virtualbox" do |vb|
-            vb.name = "kubenode0#{i}"
+            vb.name = "tnode0#{i}"
             vb.memory = 2048
             vb.cpus = 2
         end
-        node.vm.hostname = "kubenode0#{i}"
-        node.vm.network :private_network, ip: IP_NW + "#{NODE_IP_START + i}"
-                node.vm.network "forwarded_port", guest: 22, host: "#{2720 + i}"
+        node.vm.hostname = "tnode0#{i}"
+        # node.vm.network :private_network, ip: IP_NW + "#{NODE_IP_START + i}"
+        node.vm.network :public_network, ip: IP_NW + "#{NODE_IP_START + i}"
+        node.vm.network "forwarded_port", guest: 22, host: "#{2720 + i}"
 
         node.vm.provision "setup-hosts", :type => "shell", :path => "ubuntu/vagrant/setup-hosts.sh" do |s|
           s.args = ["enp0s8"]

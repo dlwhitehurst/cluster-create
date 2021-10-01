@@ -9,11 +9,9 @@ sed -e '/^.*ubuntu-bionic.*/d' -i /etc/hosts
 
 # Update /etc/hosts about other hosts
 cat >> /etc/hosts <<EOF
-192.168.5.11  tavros-master-1
-192.168.5.12  tavros-master-2
-192.168.5.21  tavros-worker-1
-192.168.5.22  tavros-worker-2
-192.168.5.30  tavros-lb
+192.168.5.11  nfs 
+192.168.5.12  world of warcraft  
+192.168.5.21  aol 
 EOF
 
 # iptables bridging allow
@@ -57,10 +55,11 @@ echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https:/
 
 # Update and install
 sudo apt-get update
-sudo apt-get install -y kubeadm=1.22.0-00 kubelet=1.22.0-00 kubectl=1.22.0-00
+sudo apt-get install -y kubeadm=1.21.0-00 kubelet=1.21.0-00 kubectl=1.21.0-00
 sudo apt-mark hold kubeadm kubelet kubectl
 
 # clone cluster-create repo
 git clone https://github.com/dlwhitehurst/cluster-create.git
 
-
+# Add NFS Client
+sudo apt-get install -y nfs-common
